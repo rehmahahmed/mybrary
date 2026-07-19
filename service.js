@@ -10,7 +10,8 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.set('layout', './layouts/layout');
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI)
+  .catch(err => console.error('Initial connection error:', err));
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
